@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TFS PR Viewer</title>
+</head>
+<body>
+    <h1>Pull Requests</h1>
+    <ul id="pr-list"></ul>
+
+    <script>
+        fetch("/api/pullrequests")
+            .then(res => res.json())
+            .then(data => {
+                const ul = document.getElementById("pr-list");
+                data.forEach(pr => {
+                    const li = document.createElement("li");
+                    li.textContent = pr.id + " - " + pr.title + " (" + pr.status + ")";
+                    ul.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
